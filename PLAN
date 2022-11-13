@@ -1,0 +1,25 @@
+But
+Faire une webapp pour chercher un film parmi la liste
+
+Etapes
+1. Afficher le film qui correspond exactement au titre entré
+2. Afficher les films correspondant dont le titre contient le titre entré
+3. Proposer de l'auto complétion
+    Chercher dans la base les films correspondant contenant le titre entré et proposer le premier alphabetiquement
+    Valider en pressant la fleche de droite ou tab
+    Proposer le plus court ?
+4. Le faire dynamiquement, sans appuyer sur entrée
+
+Tech stack
+Front: React
+Back: Node/Express
+    Alt: Python, C++
+DB: Redis
+
+TODO
+Back:
+    Join les données pour avoir par film le titre, le genre, le rating moyen, les tags récurrents, les liens
+Front:
+    Faire une page avec un champ de recherche
+    Mettre la liste entière des films sous le champ de recherche
+    Faire pour chaque film une fiche où on peut voir ces infos
