@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import Response, jsonify
+from flask import Flask, Response, jsonify
 import csv
 from operator import itemgetter
 import pandas as pd
