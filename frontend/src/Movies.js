@@ -1,6 +1,7 @@
+// Component corresponding to a single movie
 function Movie(props) {
+    // Get the attributes from the props
     const movie = props.data ? props.data : []
-    const movie_id = movie[0]
     const movie_name = movie[1]
     const movie_genre = movie[2].split('|')
     const movie_link_imdb = "http://www.imdb.com/title/tt" + movie[4]
@@ -9,10 +10,11 @@ function Movie(props) {
     const movie_tags = movie[7]
     
     return(
+        // Return the movie attributes with a little bit of style
         <div className='Movie'>
             <div>
                 <span className='Title'>
-                    {movie_id} - {movie_name}
+                    {movie_name}
                 </span>
                 <span className="Rating">
                     {Math.round(movie_avg_rating * 10) / 10}
@@ -33,24 +35,24 @@ function Movie(props) {
                 {movie_tags.join(' ; ')}
             </div>
         </div>
-        // <div key={props.key}>{movie[0]} {movie[1]} {movie[2]} {movie[3]} {movie[4]} {movie[5]} {movie[6]}</div>
     );
 }
 
+// Component for the list of movies
 function Movies(props) {
-    const filteredData = props.data.filter((el) => {
-        //if no input the return the original
+    // I used help from this link for the searching feature : https://dev.to/salehmubashar/search-bar-in-react-js-545l
+    const filteredData = props.data.filter((original_data) => {
+        // If input is empty, return full data
         if (props.input === '') {
-            return el;
+            return original_data;
         }
-        //return the item which contains the user input
+        // If input is not empty, return filtered data
         else {
-            // console.log(el[1].toLowerCase().includes(props.input))
-            return el[1].toLowerCase().includes(props.input)
-            // return el.text.toLowerCase().includes(props.input)
+            return original_data[1].toLowerCase().includes(props.input)
         }
     })
     return(
+        // Use the Movie Component to show the movies
         <div>
             {filteredData.map((movie,
             idx) => <Movie key={idx} data={movie}/> )}
