@@ -1,5 +1,5 @@
 # Movie Search
-Project made with React for the frontend and Python/flask for the backend
+Project made with React for the frontend and Python/Flask for the backend
 
 ## Installation
 
