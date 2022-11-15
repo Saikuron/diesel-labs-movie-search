@@ -2,9 +2,48 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Movie {
+  margin: 1%;
+  padding: 1%;
+  /* max-width: max-content; */
+  background-color: #303030;
+}
+
+.Title {
+  font-size: 150%;
+}
+
+.Rating {
+  color: yellow;
+  margin: 1%;
+  padding: 0.5%;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.Genres {
+  color: gray;
+  font-size: 80%;
+  margin-bottom: 0.7%;
+}
+
+.Link {
+  background-color: orchid;
+  color: orange;
+  margin: 0.5%;
+  padding: 0.4%;
+  border-radius: 20%;
+  text-decoration: none;
+}
+
+.Tags {
+  margin-top: 0.5%;
+  color: #a8aca4;
+}
+
+.test {
+  text-align: left;
+  margin: 5%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,5 +1,6 @@
 import './App.css';
 import axios from 'axios';
+import Movie from './Movie'
 
 import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
@@ -9,22 +10,13 @@ const allowedExtensions = ["csv"];
 
 function App() {
   const [data, setData] = useState([]);
-  // const [parsedData, setParsedData] = useState({});
   const [error, setError] = useState("");
   const [file, setFile] = useState("");
-
-  // useEffect(async () => {
-  //   const result = await axios(
-  //     'http://127.0.0.1:5000',
-  //   );
-  //   setData(result);
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
         'http://127.0.0.1:5000/whole',
-        // 'https://hn.algolia.com/api/v1/search?query=redux',
       );
       setData(result.data);
     };
@@ -83,7 +75,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-            <label htmlFor="csvInput" style={{ display: "block" }}>
+            {/* <label htmlFor="csvInput" style={{ display: "block" }}>
                 Enter CSV File
             </label>
             <input
@@ -94,12 +86,11 @@ function App() {
             />
             <div>
                 <button onClick={handleParse}>Parse</button>
-            </div>
+            </div> */}
+            <div className='SearchBar'>abcdef</div>
             <div style={{ marginTop: "3rem" }}>
-                {error ? error : data.map((itm,
-                  idx) => <div key={idx}>{itm[0]} {itm[1]} {itm[2]} {itm[3]} {itm[4]} {itm[5]} {itm[6]} {itm[7]}</div>)}
-                {/* {error ? error : data.map((elem, idx) => <div key={idx}> {'' + elem["movieId"] + ' - ' + elem["imdbId"]} </div>)} */}
-                {/* {error ? error : parsedData.map((elem, idx) => <div key={idx}> {'' + elem["movieId"] + ' - ' + elem["imdbId"]} </div>)} */}
+                {error ? error : data.map((movie,
+                  idx) => <Movie key={idx} data={movie}/> )}
             </div>
         </div>
       </header>
