@@ -26,3 +26,5 @@ USAGE.txt
 PLAN.txt
 README.asciidoc
 .gitignore
+
+venv/
