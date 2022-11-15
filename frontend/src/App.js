@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
-import Movie from './Movie'
+import Movies from './Movies'
+import TextField from "@mui/material/TextField";
 
 import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
@@ -12,6 +13,13 @@ function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [file, setFile] = useState("");
+  const [inputText, setInputText] = useState("");
+
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,10 +95,20 @@ function App() {
             <div>
                 <button onClick={handleParse}>Parse</button>
             </div> */}
-            <div className='SearchBar'>abcdef</div>
+            <h1>React Search</h1>
+            <div className="SearchBar">
+              <TextField
+                id="outlined-basic"
+                onChange={inputHandler}
+                variant="outlined"
+                fullWidth
+                label="Search"
+              />
+            </div>
             <div style={{ marginTop: "3rem" }}>
-                {error ? error : data.map((movie,
-                  idx) => <Movie key={idx} data={movie}/> )}
+              <Movies input={inputText} data={data}/>
+                {/* {error ? error : data.map((movie,
+                  idx) => <Movie key={idx} data={movie}/> )} */}
             </div>
         </div>
       </header>

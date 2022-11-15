@@ -1,4 +1,3 @@
-
 function Movie(props) {
     const movie = props.data ? props.data : []
     const movie_id = movie[0]
@@ -38,4 +37,25 @@ function Movie(props) {
     );
 }
 
-export default Movie;
+function Movies(props) {
+    const filteredData = props.data.filter((el) => {
+        //if no input the return the original
+        if (props.input === '') {
+            return el;
+        }
+        //return the item which contains the user input
+        else {
+            // console.log(el[1].toLowerCase().includes(props.input))
+            return el[1].toLowerCase().includes(props.input)
+            // return el.text.toLowerCase().includes(props.input)
+        }
+    })
+    return(
+        <div>
+            {filteredData.map((movie,
+            idx) => <Movie key={idx} data={movie}/> )}
+        </div>
+    );
+}
+
+export default Movies;
