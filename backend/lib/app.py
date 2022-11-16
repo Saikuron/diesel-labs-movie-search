@@ -35,6 +35,9 @@ with open('data/movies.csv', mode ='r', encoding="utf8") as file:
     for lines in csvFile:
         movies.append(lines)
 
+# Make a list with just movies names for autocomplete
+movies_names = [movie[1] for movie in movies[1:]]
+
 # Make an average of the ratings for each movie
 def make_average_ratings():
     # Changee the type of the movieId and userId to int instead of string
@@ -110,14 +113,27 @@ def make_whole():
 
 whole_table = make_whole()
 
-# The only endpoint used gives the data with everything needed
+# Endpoint used to give the data with everything needed
 @app.route("/whole")
 def get_whole():
     response = jsonify(whole_table)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+# Endpoint to get the movies names 
+@app.route("/movies-names")
+def get_movies_names():
+    response = jsonify(movies_names)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
 # Other routes for debugging:
+
+# @app.route("/movies")
+# def get_movies():
+#     response = jsonify(movies)
+#     response.headers.add('Access-Control-Allow-Origin', '*')
+#     return response
 
 # @app.route("/links")
 # def get_links():
@@ -125,11 +141,6 @@ def get_whole():
 #     response.headers.add('Access-Control-Allow-Origin', '*')
 #     return response
 
-# @app.route("/movies")
-# def get_movies():
-#     response = jsonify(movies)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
 
 # @app.route("/ratings")
 # def get_ratings():
