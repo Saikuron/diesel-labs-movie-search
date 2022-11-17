@@ -3,6 +3,8 @@ Project made with React for the frontend and Python/Flask for the backend
 
 ## Installation
 
+npm and python are needed to run this project
+
 Install the necessary modules for the backend (full instructions [here](https://flask.palletsprojects.com/en/2.2.x/installation/))
 ```
 cd backend
