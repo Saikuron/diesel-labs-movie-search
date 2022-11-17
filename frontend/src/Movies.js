@@ -6,7 +6,7 @@ function Movie(props) {
     const movie_genre = movie[2] ? movie[2].split('|') : [""]
     const movie_link_imdb = "http://www.imdb.com/title/tt" + movie[4]
     const movie_link_tmdb = "https://www.themoviedb.org/movie/" + movie[5]
-    const movie_avg_rating = movie[6]
+    const movie_avg_rating = isNaN(movie[6]) ? "NA" : Math.round(movie[6] * 10) / 10
     const movie_tags = movie[7] ? movie[7] : [""]
     
     return(
@@ -17,7 +17,7 @@ function Movie(props) {
                     {movie_name}
                 </span>
                 <span className="Rating">
-                    {Math.round(movie_avg_rating * 10) / 10}
+                    {movie_avg_rating}
                 </span>
             </div>
             <div className="Genres">
