@@ -16,9 +16,9 @@ function Movie(props) {
                 <span className='Title'>
                     {movie_name}
                 </span>
-                {/* <span className="Rating">
+                <span className="Rating">
                     {Math.round(movie_avg_rating * 10) / 10}
-                </span> */}
+                </span>
             </div>
             <div className="Genres">
                 {movie_genre.join(' | ')}
@@ -40,11 +40,11 @@ function Movie(props) {
 
 // Component for the list of movies
 function Movies(props) {
+    const moviesToShow = props.filteredData ? props.filteredData.map((movie, idx) => <Movie key={idx} data={movie}/> ) : "Nothing"
     return(
         // Use the Movie Component to show the movies received from the parent Component
         <div>
-            {props.filteredData.map((movie,
-            idx) => <Movie key={idx} data={movie}/> )}
+            {moviesToShow}
         </div>
     );
 }

@@ -12,7 +12,7 @@ function App() {
   // data to fetch from backend and input from user for the search
   const [moviesNames, setMoviesNames] = useState([]);
   const [data, setData] = useState([""]);
-  const [filteredData, setFilteredData] = useState([""]);
+  const [filteredData, setFilteredData] = useState([]);
   const [newSearchText, setNewSearchText] = useState("");
 
   // I used help from this link for the searching feature : https://dev.to/salehmubashar/search-bar-in-react-js-545l
@@ -37,14 +37,14 @@ function App() {
   // Get the data from the backend and save it
   useEffect(() => {
     const fetchData = async () => {
-      const movies_data = await axios(
-        'http://127.0.0.1:5000/movies-names',
+      const movies_names = await axios(
+        'http://127.0.0.1:5000/sample-names',
       );
-      setMoviesNames(movies_data.data);
-      const whole_data = await axios(
-        'http://127.0.0.1:5000/whole',
+      setMoviesNames(movies_names.data);
+      const movies_table = await axios(
+        'http://127.0.0.1:5000/sample-table',
       );
-      setData(whole_data.data);
+      setData(movies_table.data);
     };
     
     fetchData();
