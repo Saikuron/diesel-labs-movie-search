@@ -10,77 +10,66 @@ import React, { useState, useEffect } from "react";
 
 function App() {
   // data to fetch from backend and input from user for the search
-  const [data, setData] = useState([]);
-  const [movies_names, setMoviesNames] = useState([]);
-  const [inputText, setInputText] = useState("");
+  const [moviesNames, setMoviesNames] = useState([]);
+  const [data, setData] = useState([""]);
+  const [filteredData, setFilteredData] = useState([""]);
+  const [newSearchText, setNewSearchText] = useState("");
 
-  // function to get the input from the user
-  function inputHandler(e) {
-    const lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase);
-  };
+  // I used help from this link for the searching feature : https://dev.to/salehmubashar/search-bar-in-react-js-545l
+  // Function to search Movies
+  function filterMovies(e) {
+    e.preventDefault()
+    setNewSearchText(e.target.searchText.value)
+    setFilteredData(
+      data.filter((original_data) => {
+        // If input is empty, return full data
+        if (newSearchText === '') {
+            return original_data;
+        }
+        // If input is not empty, return filtered data
+        else {
+            return original_data[1].toLowerCase().includes(newSearchText);
+        }
+      })
+    );
+  }
 
   // Get the data from the backend and save it
   useEffect(() => {
     const fetchData = async () => {
-      const whole_data = await axios(
-        'http://127.0.0.1:5000/whole',
-      );
-      setData(whole_data.data);
       const movies_data = await axios(
         'http://127.0.0.1:5000/movies-names',
       );
       setMoviesNames(movies_data.data);
+      const whole_data = await axios(
+        'http://127.0.0.1:5000/whole',
+      );
+      setData(whole_data.data);
     };
-
+    
     fetchData();
   }, []);
-
+  
   return (
     <div className="App">
       <header className="App-header">
         <div>
           <h1>Movie Search</h1>
-          <Stack spacing={2} sx={{ width: 300 }}>
-            <Autocomplete
-              id="free-solo-demo"
-              freeSolo
-              // onChange={() => console.log("test")}
-              options={movies_names}
-              // options={top100Films.map((option) => option.title)}
-              renderInput={(params) => <TextField onChange={inputHandler} {...params} label="Search a movie name" />}
-            />
-            {/* <Autocomplete
-              freeSolo
-              id="free-solo-2-demo"
-              disableClearable
-              options={movies_names}
-              // options={top100Films.map((option) => option.title)}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Search input"
-                  InputProps={{
-                    ...params.InputProps,
-                    type: 'search',
-                  }}
-                />
-              )}
-            /> */}
-          </Stack>
           {/* Searchbar, updating the input data when a character is typed in */}
-          {/* <div className="SearchBar">
-            <TextField
-              id="outlined-basic"
-              onChange={inputHandler}
-              variant="outlined"
-              fullWidth
-              label="Search"
-            />
-          </div> */}
+          <form onSubmit={filterMovies}>
+            <Stack spacing={2} sx={{ width: 300 }}>
+              <Autocomplete
+                id="free-solo-demo"
+                freeSolo
+                options={moviesNames}
+                renderInput={(params) => <TextField {...params} name="searchText" value="newSearchText" label="Search a movie name" />}
+                />
+            </Stack>
+            <input type="submit" value="Submit" />
+          </form>
           <div style={{ marginTop: "3rem" }}>
-            {/* Movies list, including the input text */}
-            <Movies input={inputText} data={data}/>
+            {/* Movies list */}
+            <Movies filteredData={filteredData}/>
           </div>
         </div>
       </header>
