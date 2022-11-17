@@ -13,22 +13,21 @@ function App() {
   const [moviesNames, setMoviesNames] = useState([]);
   const [data, setData] = useState([""]);
   const [filteredData, setFilteredData] = useState([]);
-  const [newSearchText, setNewSearchText] = useState("");
 
   // I used help from this link for the searching feature : https://dev.to/salehmubashar/search-bar-in-react-js-545l
   // Function to search Movies
   function filterMovies(e) {
     e.preventDefault()
-    setNewSearchText(e.target.searchText.value)
+    const newSearchText = e.target.searchText.value
     setFilteredData(
       data.filter((original_data) => {
         // If input is empty, return full data
         if (newSearchText === '') {
-            return original_data;
+          return original_data;
         }
         // If input is not empty, return filtered data
         else {
-            return original_data[1].toLowerCase().includes(newSearchText);
+          return original_data[1].toLowerCase().includes(newSearchText);
         }
       })
     );
@@ -38,11 +37,11 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const movies_names = await axios(
-        'http://127.0.0.1:5000/sample-names',
+        'http://127.0.0.1:5000/whole-names',
       );
       setMoviesNames(movies_names.data);
       const movies_table = await axios(
-        'http://127.0.0.1:5000/sample-table',
+        'http://127.0.0.1:5000/whole-table',
       );
       setData(movies_table.data);
     };
