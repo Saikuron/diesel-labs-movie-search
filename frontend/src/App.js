@@ -27,7 +27,7 @@ function App() {
         }
         // If input is not empty, return filtered data
         else {
-          return original_data[1].toLowerCase().includes(newSearchText);
+          return original_data[1].toLowerCase().includes(newSearchText.toLowerCase());
         }
       })
     );
