@@ -7,7 +7,6 @@ import Stack from "@mui/material/Stack";
 
 import React, { useState, useEffect } from "react";
 
-
 function App() {
   // data to fetch from backend and input from user for the search
   const [moviesNames, setMoviesNames] = useState([]);

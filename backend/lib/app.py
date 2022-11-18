@@ -5,35 +5,20 @@ import pandas as pd
 
 app = Flask(__name__)
 
+# open file, read it and return its content
+def open_file(file_name):
+    result = []
+    with open(file_name, mode ='r', encoding="utf8") as file:
+        csvFile = csv.reader(file)
+        for lines in csvFile:
+            result.append(lines)
+    return result
+
 # Lists that are going to contain the data
-links = []
-movies = []
-ratings = []
-tags = []
-
-# open links.csv file, read it and save it to the links list
-with open('data/links.csv', mode ='r') as file:
-    csvFile = csv.reader(file)
-    for lines in csvFile:
-        links.append(lines)
-
-# open ratings.csv file, read it and save it to the ratings list
-with open('data/ratings.csv', mode ='r') as file:
-    csvFile = csv.reader(file)
-    for lines in csvFile:
-        ratings.append(lines)
-
-# open tags.csv file, read it and save it to the tags list
-with open('data/tags.csv', mode ='r') as file:
-    csvFile = csv.reader(file)
-    for lines in csvFile:
-        tags.append(lines)
-
-# open movies.csv file, read it and save it to the movies list
-with open('data/movies.csv', mode ='r', encoding="utf8") as file:
-    csvFile = csv.reader(file)
-    for lines in csvFile:
-        movies.append(lines)
+links = open_file("data/links.csv")
+movies = open_file("data/movies.csv")
+ratings = open_file("data/ratings.csv")
+tags = open_file("data/tags.csv")
 
 # Make a list with just movies names for autocomplete
 whole_names = [movie[1] for movie in movies[1:]]
