@@ -1,3 +1,10 @@
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import Rating from '@mui/material/Rating';
+
 // Component corresponding to a single movie
 function Movie(props) {
     // Get the attributes from the props
@@ -11,30 +18,24 @@ function Movie(props) {
     
     return(
         // Return the movie attributes with a little bit of style
-        <div className='Movie'>
-            <div>
-                <span className='Title'>
-                    {movie_name}
-                </span>
-                <span className="Rating">
-                    {movie_avg_rating}
-                </span>
-            </div>
-            <div className="Genres">
-                {movie_genre.join(' | ')}
-            </div>
-            <div>
-                <a className="Link" href={movie_link_imdb}>
-                    imdb
-                </a>
-                <a className="Link" href={movie_link_tmdb}>
-                    tmdb
-                </a>
-            </div>
-            <div className="Tags">
-                {movie_tags.join(' ; ')}
-            </div>
-        </div>
+            <Card sx={{ minWidth: 400, maxWidth: 500, backgroundColor: "#999999", margin: "1%" }}>
+                <CardContent>
+                    <Typography variant="h5" component="div">
+                        {movie_name}
+                    </Typography>
+                    <Rating value={movie_avg_rating} precision={0.1} readOnly />
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        {movie_genre.join(' | ')}
+                    </Typography>
+                    <Typography variant="body2">
+                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_imdb}>imdb</Link>
+                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_tmdb}>tmdb</Link>
+                    </Typography>
+                    <Typography variant="body2">
+                        {movie_tags.join(' ; ')}
+                    </Typography>
+                </CardContent>
+            </Card>
     );
 }
 
