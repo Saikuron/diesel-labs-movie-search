@@ -6,6 +6,7 @@ Project made with React for the frontend and Python/Flask for the backend
 npm and python are needed to run this project
 
 Install the necessary modules for the backend (full instructions [here](https://flask.palletsprojects.com/en/2.2.x/installation/))
+Make sure that your version of pip is recent, I had troubles installing pandas until I upgraded pip
 ```bash
 cd backend
 # Create an environment if needed, and activate it

@@ -25,11 +25,12 @@ whole_names = [movie[1] for movie in movies[1:]]
 whole_names = list(set(whole_names))
 
 # Make an average of the ratings for each movie
-def make_average_ratings():
+def make_average_ratings(all_ratings):
     # Changee the type of the movieId and userId to int instead of string
-    ratings_int = [[int(rating[0]), int(rating[1]), rating[2], rating[3]] for rating in ratings[1:]]
+    ratings_int = [[int(rating[0]), int(rating[1]), rating[2], rating[3]] for 
+                    rating in all_ratings[1:]]
     # Add the columns names
-    ratings_int.insert(0, ratings[0])
+    ratings_int.insert(0, all_ratings[0])
     # Sort the ratings by movies instead of by users
     ratings_movies_ordered = sorted(ratings_int[1:], key=itemgetter(1))
 
@@ -59,7 +60,7 @@ def make_average_ratings():
     ratings_averages.append([prev_movie_id, avg_rating])
     return ratings_averages
 
-avg_ratings = make_average_ratings()
+avg_ratings = make_average_ratings(ratings)
 # Add columns names
 avg_ratings.insert(0, ['movieId', 'avg_rating'])
 
@@ -86,9 +87,11 @@ def make_whole():
         tags_movie = ['']
         movie_id = movie[0]
         # Get all the tags given to this movie
-        tags_movie = list(df_tags.loc[df_tags['movieId'] == int(movie_id) ]['tag'].values)
+        tags_movie = list(df_tags.loc[df_tags['movieId'] == 
+            int(movie_id)]['tag'].values)
         # Get the average rating of this movie
-        rating_movie = df_avg_ratings[df_avg_ratings['movieId'] == int(movie_id)]['avg_rating'].values
+        rating_movie = df_avg_ratings[df_avg_ratings['movieId'] == 
+            int(movie_id)]['avg_rating'].values
         if rating_movie.size == 0:
             rating_movie = ['NA']
         else:
@@ -119,36 +122,36 @@ def get_whole_names():
 
 # Other routes for debugging:
 
-# @app.route("/movies")
-# def get_movies():
-#     response = jsonify(movies)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
+@app.route("/movies")
+def get_movies():
+    response = jsonify(movies)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
-# @app.route("/links")
-# def get_links():
-#     response = jsonify(links)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
+@app.route("/links")
+def get_links():
+    response = jsonify(links)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
-# @app.route("/ratings")
-# def get_ratings():
-#     response = jsonify(ratings)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
+@app.route("/ratings")
+def get_ratings():
+    response = jsonify(ratings)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
-# @app.route("/average_ratings")
-# def get_avg_ratings():
-#     response = jsonify(avg_ratings)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
+@app.route("/average_ratings")
+def get_avg_ratings():
+    response = jsonify(avg_ratings)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
-# @app.route("/tags")
-# def get_tags():
-#     response = jsonify(tags)
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
+@app.route("/tags")
+def get_tags():
+    response = jsonify(tags)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route("/sample-table")
 def get_sample_table():
