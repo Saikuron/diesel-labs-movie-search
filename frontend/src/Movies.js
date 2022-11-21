@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -15,23 +14,29 @@ function Movie(props) {
     const movie_link_tmdb = "https://www.themoviedb.org/movie/" + movie[5]
     const movie_avg_rating = isNaN(movie[6]) ? "NA" : Math.round(movie[6] * 10) / 10
     const movie_tags = movie[7] ? movie[7] : [""]
+
+    const rating = movie_avg_rating === "NA" ? 0 : movie_avg_rating
     
     return(
         // Return the movie attributes with a little bit of style
-            <Card sx={{ minWidth: 400, maxWidth: 500, backgroundColor: "#999999", margin: "1%" }}>
+            <Card sx={{ minWidth: 400, maxWidth: 500, margin: "1%" }}>
                 <CardContent>
-                    <Typography variant="h5" component="div">
+                    <Typography align="center" variant="h5" component="div">
                         {movie_name}
                     </Typography>
-                    <Rating value={movie_avg_rating} precision={0.1} readOnly />
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <Typography align="center" variant="body1" component="div">
+                        {movie_avg_rating}/5
+                    </Typography>
+                    {/* Reactivate when progressive loading is implemented */}
+                    {/* <Rating value={rating} precision={0.1} readOnly /> */}
+                    <Typography align="center" sx={{ mb: 1.5 }} color="text.secondary">
                         {movie_genre.join(' | ')}
                     </Typography>
-                    <Typography variant="body2">
-                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_imdb}>imdb</Link>
-                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_tmdb}>tmdb</Link>
+                    <Typography align="center">
+                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_imdb}>IMDB</Link>
+                        <Link sx = {{ margin: "2%" }} underline="hover" href={movie_link_tmdb}>TMDB</Link>
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography align="center" variant="body2">
                         {movie_tags.join(' ; ')}
                     </Typography>
                 </CardContent>

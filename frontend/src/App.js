@@ -1,11 +1,13 @@
-import './App.css';
 import axios from 'axios';
 import Movies from './Movies'
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Container from '@mui/material/Container';
 
 import React, { useState, useEffect } from "react";
+import Typography from '@mui/material/Typography';
 
 function App() {
   // data to fetch from backend and input from user for the search
@@ -49,29 +51,36 @@ function App() {
   }, []);
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <h1>Movie Search</h1>
-          {/* Searchbar, updating the input data when a character is typed in */}
-          <form onSubmit={filterMovies}>
-            <Stack spacing={2} sx={{ width: 300 }}>
-              <Autocomplete
-                id="free-solo-demo"
-                freeSolo
-                options={moviesNames}
-                renderInput={(params) => <TextField {...params} name="searchText" value="newSearchText" label="Search a movie name" />}
-                />
-            </Stack>
-            <input type="submit" value="Submit" />
-          </form>
-          <div style={{ marginTop: "3rem" }}>
-            {/* Movies list */}
-            <Movies filteredData={filteredData}/>
+    <Container maxWidth="sm">
+      <div className="App">
+        <header className="App-header">
+          <div>
+            <Typography align="center" sx={{margin: "10%"}} variant="h4">Movie Search</Typography>
+            {/* <h1>Movie Search</h1> */}
+            {/* Searchbar, updating the input data when a character is typed in */}
+            <form onSubmit={filterMovies}>
+              <Stack spacing={2} direction="row" >
+                <Autocomplete
+                  sx={{minWidth: 400}}
+                  id="free-solo-demo"
+                  freeSolo
+                  options={moviesNames}
+                  renderInput={(params) => <TextField {...params} 
+                    name="searchText" value="newSearchText" label="Type a movie name" />}
+                  />
+                <Button variant="contained" type="submit">
+                  Search
+                </Button>
+              </Stack>
+            </form>
+            <div style={{ marginTop: "3rem" }}>
+              {/* Movies list */}
+              <Movies filteredData={filteredData}/>
+            </div>
           </div>
-        </div>
-      </header>
-    </div>
+        </header>
+      </div>
+    </Container>
   );
 }
 
